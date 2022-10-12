@@ -50,7 +50,25 @@ export default function NavBar() {
           :""}
           </Nav>
         <span style={{ }} className={'profile'}>
-        {auth.user? auth.user +' ':""}<Link to={`/user/${auth?.user}`} className="profile" ><FaUserAstronaut /></Link>
+        {
+  auth?.roles?.includes(5150) ? (
+    <Link to={"/users"}>
+      {" "}
+      {auth.user + " "} <FaUserAstronaut />
+    </Link>
+  ) : auth?.user ? (
+    <Link to={"/profile"}>
+      {auth.user}
+      {auth.user + " "} <FaUserAstronaut />
+    </Link>
+  ) : (
+    <Link to={"/login"}>
+      {" "}
+      <FaUserAstronaut />
+    </Link>
+  )
+}
+
       </span>
         
       </Navbar.Collapse>
