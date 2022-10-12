@@ -36,13 +36,16 @@ const Users = () => {
     return (
         <article>
             <h2>Users List</h2>
+            <div className="users">
             {
             users.length>0 ?
             users.map((user)=>{
-                return <UserCard roles={Object.values(user.roles).filter(Boolean)} name={user.username} profilePic={user.profilePic} email={user.email} count={user.reviewcount} />
+                return <div className="user" ><UserCard roles={Object.values(user.roles).filter(Boolean)} name={user.username} profilePic={user.profilePic} email={user.email} count={user.reviewcount} /></div>
+                
 
             }):"No users found"
             }
+            </div>
 
 
         </article>

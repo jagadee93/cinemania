@@ -11,7 +11,6 @@ const handleLogin = async (req, res) => {
     // console.log(foundUser)
     
     // count>=3?roles.Critic?roles.push('Critic':)
-
     if (!foundUser) return res.sendStatus(401); //Unauthorized 
     // evaluate password 
     const match = await bcrypt.compare(pwd, foundUser.password);
