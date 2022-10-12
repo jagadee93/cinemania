@@ -55,13 +55,21 @@ function AddMovie() {
                 setErrMsg("failed")
             }
             errRef.current.focus();
-
+            setSuccess(true);
+            setErrMsg("added to movies")
+            setTitle('')
+            setYear('')
+            setGenre('')
+            setLanguage('')
+            setPoster('')
+            setPlot('')
         }
     }
   return (
     <div className='addMovie'>
+    <section>
     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-    <h1>add movie</h1>
+    <h2>add movie</h2>  
     <form onSubmit={handleSubmit}>
         <label htmlFor="username">
             title:
@@ -101,7 +109,7 @@ function AddMovie() {
             language:
         </label>
          <input
-            type="language"
+            type="text"
             id="genre"
             onChange={(e) => setLanguage(e.target.value.trim())}
             value={language}
@@ -127,6 +135,7 @@ function AddMovie() {
 
         <button className=''>Add movie</button>
     </form>
+    </section>
 </div>
   )
 }

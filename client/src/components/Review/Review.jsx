@@ -3,7 +3,7 @@ import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 
 
-
+const ImgSrc='https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg'
 
 const Review = ({people}) => {
   const {auth}=useAuth()
@@ -65,7 +65,7 @@ const Review = ({people}) => {
       <h3> reviews </h3>
       <div className="img-container">
         <img 
-          src={'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg'} 
+          src={ImgSrc} 
           alt={name} 
           className="person-img" />
         <span className="quote-icon">

@@ -32,7 +32,6 @@ const Users = () => {
             controller.abort();
         }
     }, [])
-
     return (
         <article>
             <h2>Users List</h2>

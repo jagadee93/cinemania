@@ -51,7 +51,9 @@ const Admin = () => {
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             response?.data?setMovies(response.data):setStatus('No pending movies found');
-            response?.status===204?setErrMsg("no movies found"):''
+            if (response.data.status===204){
+                setErrMsg("no movies found")
+            }
             }
             
             catch (err) {

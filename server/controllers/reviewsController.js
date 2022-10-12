@@ -4,20 +4,17 @@ const User = require("../model/User");
 const Movie=require("../model/Movies");
 const { v4: uuidv4 } = require('uuid');
 const { response } = require("express");
-; // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 const apiGetAllReviewsOfaMovie = async (req,res) => { 
     const movies=await Review.find()
-
     if (movies.length ===0 ) return res.status(404).json({"message": " not found"})
-     console.log(movies,"movie");
      return res.json(movies);
 }
 
 const apiPostReview = async (req, res)  =>{
     const uniqueId=uuidv4();
     const {movieId,review,rating} = req.body;
-    console.log(req.body.username)
+   
     const FoundMovie= await Movie.findOne({_id:req.body.movieId})
     const movieYear=parseInt(FoundMovie?.year)
     if (movieYear>(new Date().getFullYear())) return res.status(400).json({message:"you cant review upcoming movie"})
@@ -27,7 +24,6 @@ const apiPostReview = async (req, res)  =>{
     
     
     const foundUser= await User.findOne({username:req.body.username});
-    console.log(foundUser)
     if (!foundUser) return res.status(404)
     const userRating=foundUser.roles.Critic? (rating*2)/2 :rating
     console.log(userRating,"here is rating")
@@ -47,14 +43,6 @@ const apiPostReview = async (req, res)  =>{
         count ===3?foundUser.roles.Critic=1984:""
         console.log(Role)
         foundUser.reviewcount=count
-        // const result =await User.updateOne(
-        //     {_id:req.body.userId},
-        //     {$addToSet:{reviews:uniqueId}},
-        // )
-        // const result2=await User.updateOne(
-        //     {_id:req.body.userId},
-        //     {$addToSet:{reviewedMovies:movieId}},
-        // );
         resulte =await foundUser.save()
 
         console.log(resulte,"user updated");

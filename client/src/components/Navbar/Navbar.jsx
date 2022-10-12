@@ -47,7 +47,7 @@ export default function NavBar() {
           <Link className="navLink" to="/admin">PendingMovies</Link>
           :auth?.roles?.includes(1984)?<div><h4 className="nav-text">Critic</h4></div>
           :auth?.roles?.includes(2001)?<div><h4 className="nav-text">viewer</h4></div>
-          :""}
+          :<Link className="navLink" to="/register">Register</Link>}
           </Nav>
         <span style={{ }} className={'profile'}>
         {

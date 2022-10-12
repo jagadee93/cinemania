@@ -229,10 +229,8 @@ const Register = () => {
                     </form>
                     <p>
                         Already registered?<br />
-                        <span className="line">
-                            {/*put router link here*/}
-                            <Link to ="/login" > Sign in </Link>
-                        </span>
+                      
+                           <button style={{color:"pink"}}><Link to ="/login" > Sign in </Link></button> 
                     </p>
                 </div>
             )}

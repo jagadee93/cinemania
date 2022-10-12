@@ -14,9 +14,7 @@ function Reviews(props) {
     const [show, setShow] = useState(false);
     const handleClose = async() => {
         postReview();
-        setTimeout(() =>{
             setShow(false)
-        },3000)
         setErrMsg('')
         ;}
     const handleShow = () => {
@@ -128,8 +126,6 @@ useEffect(() => {
             <div className="details">
             <div className="rateAndLangD">
                 <h5 className="movieReleaseDateD">
-                {" Rating "}
-                {movie.rating ? movie.rating : 5}{" "}
                 </h5>
             </div>
 
@@ -199,13 +195,15 @@ useEffect(() => {
         Add review 
       </Button>
 
+      <section className="reviewModel">
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
+       
           <Modal.Title>Enter review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         {
-            errMsg
+            <h2>{errMsg}</h2>
         }
         <div style={{color:'orange'}}>
         {rating>=1? (<IoIosStar  onClick={() =>setRating(1)}/>) : (<IoIosStarOutline onClick={() => setRating(1)}/>)}
@@ -220,7 +218,9 @@ useEffect(() => {
         {rating>=10?(<IoIosStar onClick={() =>setRating(10)} />) : (<IoIosStarOutline onClick={() =>setRating(10)} />)}
         <h4>{rating}</h4>
         </div>
-          <Form>
+
+          
+          <Form >
             <Form.Group
               className="mb-3" >
               <Form.Label>Enter Rating here</Form.Label>
@@ -241,6 +241,7 @@ useEffect(() => {
           </Button>
         </Modal.Footer>
       </Modal>
+      </section>
     </>
 
     <>

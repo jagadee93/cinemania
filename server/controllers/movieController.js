@@ -5,18 +5,15 @@ const User = require("../model/User");
 const apiGetMovies = async (req, res) => {
     const moviesPerPage=req?.query?.moviesPerPage?parseInt(req.query.moviesPerPage):12
     const page=req?.query?.page?(parseInt(req.query.page-1)*moviesPerPage):0;
-    console.log(page)
     const movies = await Movies.find().where({approvedStatus:true}).skip(page).limit(moviesPerPage).exec();
     if (!movies) return res.status(204).json({ 'message': 'No movies found.' });
     res.json(movies);
 }
 const apiAddNewMovie = async (req, res) => {
-    console.log(req.body)
     if (!req?.body?.title || !req?.body?.year ||!req?.body?.language ||!req?.body?.genres) {
         return res.status(400).json({ 'message': 'Movie title and year of release and language are required' });
     }
     const result = await Movies.findOne({ title:req.body.title })
-    console.log(result)
     if (result) {
     // movie exists...
     return res.status(403).json({ 'message':"movie already exists" });
@@ -46,16 +43,7 @@ const apiAddNewMovie = async (req, res) => {
         Count+=1
         Count===3?foundUser.roles.Critic=1984:""
         foundUser.addedMovies.push(req.body.title)
-
-
-        // const update =await User.updateOne(
-        //     { username:req.body.username}, 
-        //     { $push: { addedMovies: req.body.title } },
-        // );
         await foundUser.save();
-        console.log(update,"updated");
-        console.log(update)
-
         res.status(201).json(result); 
     } catch (err) {
         console.error(err);
@@ -66,13 +54,11 @@ const apiAddNewMovie = async (req, res) => {
 const apiDeleteMovie =async() =>{
     if (!req.body.movieid)  return res.status(403).json({"message":"provide movie id"})
     const result = await Movies.findByIdAndDelete({_id:movieid})
-    console.log(result)
     return res.status(200)
 }
 const apiUpdateMovie =async(req,res) =>{
     if (!req?.body?.movieId || !req?.body?.code) return res.status(409)
     const movieDetails=await Movies.findOne({_id:req?.body?.movieId })
-    console.log(movieDetails)
     movieDetails.approvedStatus= req?.body?.code ? true : false;
     movieDetails.poster=req?.body?.poster
     movieDetails.bgPoster=req?.body?.bgPoster
@@ -83,17 +69,15 @@ const apiUpdateMovie =async(req,res) =>{
 
 }
 const apiGetPendingMovies= async(req,res) =>{
-    console.log("im in admin page")
     const movies = await Movies.find().where({approvedStatus:false}).exec();
     if (!movies) return res.status(204).json({"message" :"no movies found"})
-    // console.log(movies)
     return res.json(movies)
 
 }
 
 const apiGetOneMovie = async(req,res) =>{
     // console.log(req.params.id,"id");
-    // if (((req.params.id).length<24)) return res.status(400).json({"message":"invalid id"})
+    if (((req.params.id).length<24)) return res.status(400).json({"message":"invalid id"})
     const movieDetails = await Movies.find({_id:req.params.id}).exec();
     if (!movieDetails) return res.status(400).json({"message":"notfound"})
     return res.json(movieDetails);

@@ -1108,6 +1108,7 @@ Reviews
 
 /*********************** forms css *************/
 .addMovie {
+  margin-top: 130px !important;
   margin: auto;
   border: 2px skyblue !important;
   width: 100%;
@@ -1146,7 +1147,7 @@ a,
 a:visited {
   color: #fff;
 }
-
+input[type="email"],
 input[type="text"],
 input[type="number"],
 input[type="password"],
@@ -1242,3 +1243,7 @@ li {
 }
 
 
+
+.reviewModel{
+  margin-top: 100px !important;
+}

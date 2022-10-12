@@ -17,10 +17,8 @@ const deleteUser = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    console.log(req.params.id)
     if (!req?.params?.id) return res.status(400).json({ "message": 'User ID required' });
     const user = await User.findOne({ username: req.params.id}).exec();
-    console.log(user,"hey im in custom user route")
     if (!user) {
         return res.status(204).json({ 'message': `User ID ${req.params.id} not found` });
     }
