@@ -57,6 +57,10 @@ const moviesSchema=new Schema({
             type:String,
             required: true,
         },
+        id:{
+            type:Schema.Types.ObjectId,
+            ref:'user',
+        }
     },
     rating:{
         type:Number,

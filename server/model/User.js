@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+    refreshToken:{
+        type:String,
+    } ,
     username: {
         type: String,
         lowercase:true,
@@ -48,7 +51,7 @@ const userSchema = new Schema({
         ]
     },
     reviews:[{type:String,ref:"review"}],
-    refreshToken: String
+
 });
 
 module.exports = mongoose.model('User', userSchema);

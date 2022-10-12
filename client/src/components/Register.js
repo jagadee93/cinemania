@@ -9,7 +9,7 @@ import axios from "../api/axios"
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css"
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const USER_REGEX = /^[a-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
@@ -114,9 +114,6 @@ const Register = () => {
                         Navigate("/login")
                     }
                 </div>)
-
-
-                
             : (
                 <div className="form1">
                     <p ref={errRef} className={errMsg ? "errMsg" : "offscreen"} aria-live="assertive">{errMsg}</p>

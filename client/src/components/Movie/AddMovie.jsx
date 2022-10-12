@@ -1,14 +1,16 @@
 import React,{useEffect,useRef,useState} from 'react'
 import axios from '../../api/axios';
-import "../../index.css"
+import "../../index.css";
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 function AddMovie() {
+
     const {auth} = useAuth();
     console.log(auth)
     const role=Math.max(...auth.roles)
     const titleRef= useRef();
     const [title,setTitle]=useState('');
-    const [year,setYear]=useState(2000)
+    const [year,setYear]=useState(new Date().getFullYear())
     const [errMsg,setErrMsg]=useState('')
     const [genre,setGenre]=useState('')
     const [language,setLanguage]=useState('')
@@ -24,7 +26,7 @@ function AddMovie() {
         e.preventDefault();
         try {
             const response = await axios.post("/movies",
-                JSON.stringify({title,year,genres:genre,role,plot,username:auth.user,language:language,poster}),
+                JSON.stringify({title,year,genres:genre,role,plot,username:auth.user,id:auth.id,language,poster}),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -35,7 +37,12 @@ function AddMovie() {
             //console.log(JSON.stringify(response))
             setSuccess(true);
             setErrMsg("added to movies")
-
+            setTitle('')
+            setYear('')
+            setGenre('')
+            setLanguage('')
+            setPoster('')
+            setPlot('')
             //clear state and controlled inputs
         } catch (err) {
             if (!err?.response) {
@@ -54,7 +61,6 @@ function AddMovie() {
   return (
     <div className='addMovie'>
     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-    {}
     <h1>add movie</h1>
     <form onSubmit={handleSubmit}>
         <label htmlFor="username">
@@ -65,7 +71,7 @@ function AddMovie() {
             id="title"
             ref={titleRef}
             autoComplete="off"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value.toLowerCase())}
             value={title}
             required
         />
@@ -75,7 +81,7 @@ function AddMovie() {
         <input
             type="number"
             id="year"
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => setYear(e.target.value.trim())}
             value={year}
             required
         />
@@ -87,39 +93,39 @@ function AddMovie() {
         <input
             type="text"
             id="genre"
-            onChange={(e) => setGenre(e.target.value)}
+            onChange={(e) => setGenre(e.target.value.trim())}
             value={genre}
             required
         />
-        <label htmlFor="genre">
+        <label htmlFor="language">
             language:
         </label>
          <input
-            type="text"
+            type="language"
             id="genre"
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => setLanguage(e.target.value.trim())}
             value={language}
             required
         />
-        <label htmlFor="genre">
+        <label htmlFor="poster">
             poster:
         </label>
          <input
             type="text"
-            id="genre"
-            onChange={(e) => setPoster(e.target.value)}
+            id="poster"
+            onChange={(e) => setPoster(e.target.value.trim())}
             value={poster}
             required
         />
         <label for="plot" >Plot</label>
         <textarea name="body"
                 cols={80}
-                rows={4}
-                onChange={(e) =>setPlot(e.target.value)}
+                rows={2}
+                onChange={(e) =>setPlot(e.target.value.trim())}
                 value={plot}
         />
 
-        <button>Add movie</button>
+        <button className=''>Add movie</button>
     </form>
 </div>
   )

@@ -10,10 +10,8 @@ const Home = () => {
         await logout();
         navigate('/linkpage');
     }
-
     return (
         <>
-       
         <Movies />
         </>
     )

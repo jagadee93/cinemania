@@ -35,16 +35,24 @@ const apiAddNewMovie = async (req, res) => {
             bgPoster: req.body.bgPoster,
             addedBy:{
                 username:req.body.username,
-                _id:req.body.id
+                id:req.body.id
             }
             
         });
         console.log(result);
-        
-        const update =await User.updateOne(
-            { username:req.body.username}, 
-            { $push: { addedMovies: req.body.title } },
-        );
+
+        const foundUser= await User.findOne({username:req.body.username});
+        let Count=foundUser.addedMovies.length
+        Count+=1
+        Count===3?foundUser.roles.Critic=1984:""
+        foundUser.addedMovies.push(req.body.title)
+
+
+        // const update =await User.updateOne(
+        //     { username:req.body.username}, 
+        //     { $push: { addedMovies: req.body.title } },
+        // );
+        await foundUser.save();
         console.log(update,"updated");
         console.log(update)
 
