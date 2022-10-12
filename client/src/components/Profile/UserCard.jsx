@@ -1,42 +1,29 @@
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
-
-import React from 'react'
-
-function UserCard() {
+function UserCard(props) {
+    const {name,profilePic,email,count}=props;
   return (
-    <div class="wrapper">
-    <div class="clash-card barbarian">
-      <div class="clash-card__image clash-card__image--barbarian">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian.png" alt="barbarian" />
-      </div>
-      <div class="clash-card__level clash-card__level--barbarian">Critic</div>
-      <div class="clash-card__unit-name">name</div>
-      <div class="clash-card__unit-description">
-        email:@gmail.com
-      </div>
-      <div class="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
-        <div class="one-third">
-          <div class="stat">5<sup>S</sup></div>
-          <div class="stat-value">Reviews</div>
-        </div>
-        <div class="one-third">
-          <div class="stat">10</div>
-          <div class="stat-value">addedmovies</div>
-        </div>
-        <div class="one-third no-border">
-          <button>delete user</button>
-        </div>
-      </div>
-
-    </div> 
-  </div> 
-  
-  )
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" width={180} height={180} src={profilePic} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>
+          email: {email}
+        </Card.Text>
+        <Card.Text>
+          reviewed movies {count}
+        </Card.Text>
+        <Card.Text>
+          {}
+        </Card.Text>
+        <Button variant="primary">delete</Button>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default UserCard
-
-
+export default UserCard;
 
 
 

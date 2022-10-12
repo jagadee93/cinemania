@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
+import UserCard from "./Profile/UserCard";
 
 const Users = () => {
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState([]);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -35,13 +36,15 @@ const Users = () => {
     return (
         <article>
             <h2>Users List</h2>
-            {users?.length
-                ? (
-                    <ul>
-                        {users.map((user, i) => <li key={i}>{user?.username}</li>)}
-                    </ul>
-                ) : <p>No users to display</p>
+            {
+            users.length>0 ?
+            users.map((user)=>{
+                return <UserCard roles={Object.values(user.roles).filter(Boolean)} name={user.username} profilePic={user.profilePic} email={user.email} count={user.reviewcount} />
+
+            }):"No users found"
             }
+
+
         </article>
     );
 };

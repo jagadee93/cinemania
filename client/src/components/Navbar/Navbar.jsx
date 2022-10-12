@@ -54,7 +54,7 @@ export default function NavBar() {
   auth?.roles?.includes(5150) ? (
     <Link to={"/users"}>
       {" "}
-      {auth.user + " "} <FaUserAstronaut />
+      users  <FaUserAstronaut />
     </Link>
   ) : auth?.user ? (
     <Link to={"/profile"}>
