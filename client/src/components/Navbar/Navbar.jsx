@@ -58,7 +58,6 @@ export default function NavBar() {
     </Link>
   ) : auth?.user ? (
     <Link to={"/profile"}>
-      {auth.user}
       {auth.user + " "} <FaUserAstronaut />
     </Link>
   ) : (
@@ -68,9 +67,7 @@ export default function NavBar() {
     </Link>
   )
 }
-
       </span>
-        
       </Navbar.Collapse>
     </Container>
   </Navbar>

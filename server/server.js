@@ -52,6 +52,8 @@ app.use("/movies", require('./routes/api/v1/movies'))
 app.use("/reviews", require('./routes/api/v1/reviews'));
 app.use("/admin",require("./routes/api/v1/admin"))
 app.use(verifyJWT);
+app.use("/users",require("./routes/api/v1/users"))
+
 
 
 

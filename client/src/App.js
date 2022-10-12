@@ -11,6 +11,7 @@ import PersistLogin from './components/PersistLogin';
 import { Routes, Route } from 'react-router-dom';
 import Reviews from './components/Review/Reviews';
 import AddMovie from './components/Movie/AddMovie';
+import Users from './components/Users';
 import "./App.css"
 import Profile from './components/Profile/Profile'
 const ROLES = {
@@ -26,9 +27,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route path="/" element={<Home />} />
-       
         <Route path="/movies/:id" element={<Reviews />} />
-
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
@@ -49,6 +48,7 @@ function App() {
           
           <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="/admin" element={<Admin />} />
+          <Route path="/users" element={<Users />} />
           </Route>
           
          
