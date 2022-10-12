@@ -265,11 +265,8 @@ useEffect(() => {
       </Modal>
     </>
             <div>
-
-
-
             {
-                reviews ? 
+                reviews.length>0 ? 
                       <Review people={reviews} />:<h1>"No reviews found"</h1> 
             }
             </div>
