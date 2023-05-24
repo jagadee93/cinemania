@@ -20,7 +20,6 @@ Cinemania is a movie review platform built using the MERN stack (MongoDB, Expres
 - Node.js: JavaScript runtime environment for server-side development.
 - JSON Web Tokens (JWT): Used for secure authentication and authorization.
 - bcrypt.js: Library for hashing and securely storing user passwords.
-- Bootstrap: CSS framework for responsive and visually appealing designs.
 
 ## Getting Started
 
